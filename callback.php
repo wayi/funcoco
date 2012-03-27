@@ -36,13 +36,14 @@ $payload = $request['credits'];
 // Retrieve all params passed in
 $func = $_REQUEST['method'];
 
-if ($func == 'payments_completed') {
+if ($func == 'payments_gamecash_completed') {
 	$payload = json_decode(stripcslashes($payload),true);
 	// Grab the order status
 	$status = $payload['status'];
 	// Write your apps logic here for validating and recording a
 	// purchase here.
-	// 
+	$data['content']['note'] = "we have save {$payload['makeup']} gamecash here";
+	
 	// Generally you will want to move states from `placed` -> `settled`
 	// here, then grant the purchasing user's in-game item to them.
 	if ($status == 'placed') {
@@ -53,6 +54,15 @@ if ($func == 'payments_completed') {
 	// Compose returning data array_change_key_case
 	$orderid = $payload['orderid'];
 	$data['content']['orderid'] = $orderid;
+
+} else if ($func == 'validate_account'){
+	$account = json_decode($payload,true);
+	$server_id = $account['server_id'];
+	$account = $account['user']['uid'];
+	if( account_exists($server_id, $account) )
+		$data['content']['account_exists']  = 1;	//account exists
+	else
+		$data['content']['account_exists']  = 0;	//account does not exist
 
 } else if ($func == 'payments_get_gamecash') {
 	//some payment method can't save in wgs, so need to save all into game cash
@@ -76,6 +86,13 @@ $data['method'] = $func;
 
 // Send data back
 echo json_encode($data);
+
+function account_exists($server_id, $account){
+	if($server_id == 'server1_id' && $account == '312402')
+		return true;
+	else
+		return false;
+}
 
 // You can find the following functions and more details
 // on http://developers.facebook.com/docs/authentication/canvas.
