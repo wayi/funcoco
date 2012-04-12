@@ -1,18 +1,5 @@
 <?php
-// Copyright 2004-Present Facebook. All Rights Reserved.
-
-/**
- * You should reference http://developers.facebook.com/docs/credits/ as you
- * familiarize yourself with callback.php. In particular, read all the steps
- * under "Credits Tutorial" and "Credits Callback".
- *
- * Your application needs the following inputs and outputs
- *
- * @param int order_id
- * @param string status
- * @param string method
- * @param array order_details (JSON-encoded)
- *
+/*
  * @return array A JSON-encoded array with order_id, next_state (optional: error code, comments)
  */
 
@@ -95,7 +82,6 @@ function account_exists($server_id, $account){
 }
 
 // You can find the following functions and more details
-// on http://developers.facebook.com/docs/authentication/canvas.
 function parse_signed_request($signed_request, $app_secret) {
 	list($encoded_sig, $payload) = explode('.', $signed_request, 2);
 	//
@@ -118,7 +104,6 @@ function parse_signed_request($signed_request, $app_secret) {
 }
 
 function base64_url_decode($input) {
-	//return base64_decode(strtr($input, '-_', '+/'));
 	return base64_decode($input);
 }
 
