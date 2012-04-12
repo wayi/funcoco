@@ -9,7 +9,7 @@ $app_secret = 'd83947a3c54d613077535867fab720ff';
 // Prepare the return data array
 $data = array('content' => array());
 
-// Parse the signed_request to verify it's from Facebook
+// Parse the signed_request to verify it's from f8d
 $request = parse_signed_request($_REQUEST['signed_request'], $app_secret);
 
 if ($request == null) {
