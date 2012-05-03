@@ -1,0 +1,12 @@
+f8d funcoco example
+	version: 2.0.0
+	updated: 2012.5.3
+	created: 2012.3.2
+
+files
+	-callback.php		//handling transaction
+	-serverlist.php 	//provide server list
+
+
+change log
+	2.0	remove payments_get_gamecash

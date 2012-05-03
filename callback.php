@@ -42,18 +42,25 @@ if ($func == 'payments_gamecash_completed') {
 	$status = $payload['status'];
 	// Write your apps logic here for validating and recording a
 	// purchase here.
-	$data['content']['note'] = "we have save {$payload['makeup']} gamecash here";
-	
-	// Generally you will want to move states from `placed` -> `settled`
-	// here, then grant the purchasing user's in-game item to them.
-	if ($status == 'placed') {
-		$next_state = 'settled';
-		$data['content']['status'] = $next_state;
+	$success = true;
+	if($success){
+		$data['content']['note'] = "we have save {$payload['makeup']} gamecash here";
+		
+		// Generally you will want to move states from `placed` -> `settled`
+		// here, then grant the purchasing user's in-game item to them.
+		if ($status == 'placed') {
+			$next_state = 'settled';
+			$data['content']['status'] = $next_state;
+		}
+
+		// Compose returning data array_change_key_case
+		$orderid = $payload['orderid'];
+		$data['content']['orderid'] = $orderid;
+	}else{
+		//if 
+		die(make_error_report('payment failed',501));	
 	}
 
-	// Compose returning data array_change_key_case
-	$orderid = $payload['orderid'];
-	$data['content']['orderid'] = $orderid;
 
 } else if ($func == 'validate_account'){
 	$account = json_decode($payload,true);
@@ -64,21 +71,6 @@ if ($func == 'payments_gamecash_completed') {
 	else
 		$data['content']['account_exists']  = 0;	//account does not exist
 
-} else if ($func == 'payments_get_gamecash') {
-	//some payment method can't save in wgs, so need to save all into game cash
-	$credits = json_decode(stripcslashes($payload),true);
-	$credit = (int)$credits['credits'];
-		//pay with money
-		$cash_info = array(
-			'rate'		=> 2,
-			'gamecash'	=> $credit * 2, 
-			'unit'		=> 'money',
-			'unit_image'	=> 'http://10.0.2.106/kevyu/api/currency/gold.gif',
-		);
-	if(!isset($cash_info)){
-		die(make_error_report(sprintf ('get ratio failed. content:%s',$payload )));
-	}
-	$data['content'] = $cash_info;
 } 
 
 // Required by api_fetch_response()
@@ -88,6 +80,7 @@ $data['method'] = $func;
 echo json_encode($data);
 
 function account_exists($server_id, $account){
+	return true;
 	if($server_id == 'server1_id' && $account == '312402')
 		return true;
 	else

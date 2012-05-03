@@ -1,9 +1,6 @@
 <?php
-
-$gamelist = array(
-	//game 1
-	'game1_id'	=> array(
-		'name'	=> 'server1_name',
+	$gamelist = 	array(
+		'name'	=> 'game_name',
 		'status'=> 1,
 		'serverlist'=> array(			
 			'server1_id' => array(	//server 1
@@ -24,13 +21,10 @@ $gamelist = array(
 			)
 
 		)
-	)
-);
+	);
 
 
-$game_id = 'game1_id';
-
-if(isset($gamelist[$game_id]) && isset($gamelist[$game_id]['serverlist']))
-	echo json_encode($gamelist[$game_id]);
+if(isset($gamelist['serverlist']))
+	echo json_encode($gamelist);
 else
 	echo json_encode(array('error'));
