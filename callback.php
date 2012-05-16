@@ -1,22 +1,6 @@
 <?php
-// Copyright 2004-Present Facebook. All Rights Reserved.
-
-/**
- * You should reference http://developers.facebook.com/docs/credits/ as you
- * familiarize yourself with callback.php. In particular, read all the steps
- * under "Credits Tutorial" and "Credits Callback".
- *
- * Your application needs the following inputs and outputs
- *
- * @param int order_id
- * @param string status
- * @param string method
- * @param array order_details (JSON-encoded)
- *
-=======
 /*
->>>>>>> bdcb093fa6a761477d0d092f950c735c42b1c108
- * @return array A JSON-encoded array with order_id, next_state (optional: error code, comments)
+ * @return array A JSON-encoded array (optional: error code, comments)
  */
 
 // Enter your app information below
