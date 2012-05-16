@@ -13,6 +13,9 @@
  * @param string method
  * @param array order_details (JSON-encoded)
  *
+=======
+/*
+>>>>>>> bdcb093fa6a761477d0d092f950c735c42b1c108
  * @return array A JSON-encoded array with order_id, next_state (optional: error code, comments)
  */
 
@@ -22,7 +25,7 @@ $app_secret = 'YOUR_APP_SECRET';
 // Prepare the return data array
 $data = array('content' => array());
 
-// Parse the signed_request to verify it's from Facebook
+// Parse the signed_request to verify it's from f8d
 $request = parse_signed_request($_REQUEST['signed_request'], $app_secret);
 
 if ($request == null) {
@@ -70,7 +73,6 @@ if ($func == 'payments_gamecash_completed') {
 		$data['content']['account_exists']  = 1;	//account exists
 	else
 		$data['content']['account_exists']  = 0;	//account does not exist
-
 } 
 
 // Required by api_fetch_response()
@@ -81,14 +83,9 @@ echo json_encode($data);
 
 function account_exists($server_id, $account){
 	return true;
-	if($server_id == 'server1_id' && $account == '312402')
-		return true;
-	else
-		return false;
 }
 
 // You can find the following functions and more details
-// on http://developers.facebook.com/docs/authentication/canvas.
 function parse_signed_request($signed_request, $app_secret) {
 	list($encoded_sig, $payload) = explode('.', $signed_request, 2);
 	//
@@ -111,7 +108,6 @@ function parse_signed_request($signed_request, $app_secret) {
 }
 
 function base64_url_decode($input) {
-	//return base64_decode(strtr($input, '-_', '+/'));
 	return base64_decode($input);
 }
 
