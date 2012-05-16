@@ -17,7 +17,7 @@
  */
 
 // Enter your app information below
-$app_secret = 'd83947a3c54d613077535867fab720ff';
+$app_secret = 'YOUR_APP_SECRET';
 
 // Prepare the return data array
 $data = array('content' => array());
